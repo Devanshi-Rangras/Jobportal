@@ -16,7 +16,7 @@ const HomePage=()=>{
             <JobCategory/>
             <Working/>
             <Testimonials/>
-            <Subscribe/>
+            {/* <Subscribe/> */}
         </div>
     )
 }
