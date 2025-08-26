@@ -73,7 +73,7 @@ steps:
       # Remove cliSources from here
       extraProperties: |
         sonar.projectBaseDir=./
-        sonar.java.binaries=target/classes
+        sonar.java.binaries=backend/target/classes
   
   # Setup Apache Maven
   - powershell: |
@@ -100,7 +100,7 @@ steps:
 
   # Build & Test Backend with Maven
   - script: |
-      mvn -f pom.xml clean verify
+      mvn -f backend/pom.xml clean verify
     displayName: "Build & Test Backend (Maven)"
   
   # Check backend bytecode
