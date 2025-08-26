@@ -58,7 +58,7 @@ steps:
       extraProperties: |
         sonar.projectBaseDir=./
         sonar.sources=frontend
-        sonar.javascript.lcov.reportPaths=coverage/lcov.info
+        sonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
   
   # Build & Test Frontend (npm)
   - script: |
@@ -68,21 +68,21 @@ steps:
     displayName: "Build & Test Frontend"
   
   # Check coverage file
-  # - script: |
-  #     if exist frontend\coverage (
-  #       echo "Listing frontend/coverage folder..."
-  #       dir frontend\coverage
+  - script: |
+      if exist frontend\coverage (
+        echo "Listing frontend/coverage folder..."
+        dir frontend\coverage
 
-  #       if exist frontend\coverage\lcov.info (
-  #         echo "Showing first 20 lines of lcov.info..."
-  #         powershell -Command "Get-Content frontend/coverage/lcov.info -TotalCount 20"
-  #       ) else (
-  #         echo "lcov.info not found!"
-  #       )
-  #     ) else (
-  #       echo "frontend\coverage folder not found!"
-  #     )
-  #   displayName: "Check Coverage File"
+        if exist frontend\coverage\lcov.info (
+          echo "Showing first 20 lines of lcov.info..."
+          powershell -Command "Get-Content frontend/coverage/lcov.info -TotalCount 20"
+        ) else (
+          echo "lcov.info not found!"
+        )
+      ) else (
+        echo "frontend\coverage folder not found!"
+      )
+    displayName: "Check Coverage File"
   
   # Run SonarCloud Analysis
   - task: SonarCloudAnalyze@3
