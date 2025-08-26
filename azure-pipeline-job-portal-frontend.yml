@@ -59,6 +59,8 @@ steps:
         sonar.projectBaseDir=./
         sonar.sources=frontend
         sonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
+
+        sonar.exclusions=**/node_modules/**
   
   # Build & Test Frontend (npm)
   - script: |
