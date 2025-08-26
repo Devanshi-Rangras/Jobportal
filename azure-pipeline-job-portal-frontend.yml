@@ -1,0 +1,92 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+    - main
+    - '*'
+
+pool:
+  name: 'MySelfHostedpool'
+  demands: []
+
+steps:
+  - checkout: self
+    clean: false
+
+  # Prepare SonarCloud Analysis (CLI mode, before build)
+  # - task: SonarCloudPrepare@3
+  #   inputs:
+  #     SonarCloud: 'SonarCloudServiceConnection'   # <-- Service connection to your SonarCloud
+  #     organization: 'devanshi-rangras'
+  #     scannerMode: 'CLI'
+  #     configMode: 'manual'
+  #     cliProjectKey: 'Devanshi-Rangras_sample-job-portal'
+  #     cliProjectName: 'JobPortal'
+  #     cliSources: 'backend,frontend'
+  #     extraProperties: |
+  #       sonar.java.binaries=backend/target/classes
+  #       sonar.junit.reportPaths=backend/target/surefire-reports
+  #       sonar.coverage.jacoco.xmlReportPaths=backend/target/site/jacoco/jacoco.xml
+  #       sonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
+
+  #       # Exclude node_modules and build outputs
+  #       sonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
+  #   displayName: "Prepare SonarCloud Analysis (CLI Pre-Build)"
+  
+  # Prepare SonarCloud Analysis (CLI mode, before build)
+  - task: SonarCloudPrepare@3
+    inputs:
+      SonarCloud: 'SonarCloudServiceConnection'
+      organization: 'devanshi-rangras'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: 'Devanshi-Rangras_Jobportal'
+      cliProjectName: 'Jobportal'
+      # Remove cliSources from here
+      extraProperties: |
+        sonar.projectBaseDir=./
+        sonar.sources=frontend
+        sonar.javascript.lcov.reportPaths=coverage/lcov.info
+  
+  # Build & Test Frontend (npm)
+  - script: |
+      cd frontend
+      npm install
+      set CI=true && npm test
+    displayName: "Build & Test Frontend"
+  
+  # Check coverage file
+  # - script: |
+  #     if exist frontend\coverage (
+  #       echo "Listing frontend/coverage folder..."
+  #       dir frontend\coverage
+
+  #       if exist frontend\coverage\lcov.info (
+  #         echo "Showing first 20 lines of lcov.info..."
+  #         powershell -Command "Get-Content frontend/coverage/lcov.info -TotalCount 20"
+  #       ) else (
+  #         echo "lcov.info not found!"
+  #       )
+  #     ) else (
+  #       echo "frontend\coverage folder not found!"
+  #     )
+  #   displayName: "Check Coverage File"
+  
+  # Run SonarCloud Analysis
+  - task: SonarCloudAnalyze@3
+    displayName: "Run SonarCloud Analysis"
+  
+  # Publish SonarCloud Quality Gate
+  - task: SonarCloudPublish@3
+    inputs:
+      pollingTimeoutSec: '300'
+    displayName: "Publish SonarCloud Quality Gate"
