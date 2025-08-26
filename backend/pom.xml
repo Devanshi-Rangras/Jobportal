@@ -96,6 +96,60 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- Compiler Plugin for Java 21 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<release>21</release>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+            	<artifactId>sonar-maven-plugin</artifactId>
+            	<version>4.0.0.4121</version>
+			</plugin>
+
+			 <!-- JaCoCo plugin for code coverage -->
+        	<plugin>
+            	<groupId>org.jacoco</groupId>
+            	<artifactId>jacoco-maven-plugin</artifactId>
+            	<version>0.8.11</version>
+				<executions>
+					<!-- Prepare JaCoCo agent before tests -->
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+
+					<!-- Generate coverage report after tests -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Surefire Plugin for Test Reports -->
+        	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.1.2</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*Tests.java</include>
+					</includes>
+				</configuration>
+        	</plugin>
 		</plugins>
 	</build>
 
