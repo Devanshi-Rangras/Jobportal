@@ -63,13 +63,17 @@ steps:
         sonar.exclusions=**/node_modules/**
   
   # Build & Test Frontend (npm)
-  - script: |
-      cd frontend
-      npm install
-      npm test
-    displayName: "Build & Test Frontend"
-    continueOnError: false
+  - script: cd frontend
+    displayName: "Navigate to Frontend directory"
   
+  - script: npm install
+    displayName: "Install dependencies"
+    workingDirectory: 'frontend'
+  
+  - script: npm test
+    displayName: "Run tests and generate coverage"
+    workingDirectory: 'frontend'
+      
   # Check coverage file
   - script: |
       if exist frontend\coverage (
