@@ -7,6 +7,9 @@ trigger:
   branches:
     include:
       - main
+  paths:
+    include:
+      - backend/*
 
 pr:
   branches:
@@ -125,30 +128,6 @@ steps:
   #       echo "backend\target folder not found! Maybe Maven build did not run?"
   #     )
   #   displayName: "Check Backend Bytecode"
-
-  # Build & Test Frontend (npm)
-  # - script: |
-  #     cd frontend
-  #     npm install
-  #     set CI=true && npm test
-  #   displayName: "Build & Test Frontend"
-  
-  # Check coverage file
-  # - script: |
-  #     if exist frontend\coverage (
-  #       echo "Listing frontend/coverage folder..."
-  #       dir frontend\coverage
-
-  #       if exist frontend\coverage\lcov.info (
-  #         echo "Showing first 20 lines of lcov.info..."
-  #         powershell -Command "Get-Content frontend/coverage/lcov.info -TotalCount 20"
-  #       ) else (
-  #         echo "lcov.info not found!"
-  #       )
-  #     ) else (
-  #       echo "frontend\coverage folder not found!"
-  #     )
-  #   displayName: "Check Coverage File"
   
   # Run SonarCloud Analysis
   - task: SonarCloudAnalyze@3
