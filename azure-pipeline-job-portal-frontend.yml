@@ -66,8 +66,9 @@ steps:
   - script: |
       cd frontend
       npm install
-      set CI=true && npm test
+      npm test
     displayName: "Build & Test Frontend"
+    continueOnError: false
   
   # Check coverage file
   - script: |
