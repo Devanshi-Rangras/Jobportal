@@ -53,14 +53,6 @@
     "test": "react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject"
   },
-   "jest": {
-    "transformIgnorePatterns": [
-      "/node_modules/(?!axios)"
-    ],
-    "moduleNameMapper": {
-      "^\\.\\.\\/\\.\\.\\/frontend\\/src\\/Pages\\/UnauthorizedPage$": "<rootDir>/src/frontend/src/Pages/UnauthorizedPage"
-    }
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
