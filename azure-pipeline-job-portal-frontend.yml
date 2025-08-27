@@ -63,11 +63,11 @@ steps:
         sonar.exclusions=**/node_modules/**
   
   # Build & Test Frontend (npm)
-  - script: npm install
+  - script: npm install --legacy-peer-deps
     displayName: "Install dependencies"
     workingDirectory: 'frontend'
 
-  - script: npm test
+  - script: npm run test
     displayName: "Run tests and generate coverage"
     workingDirectory: 'frontend'
       
