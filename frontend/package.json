@@ -58,7 +58,7 @@
       "/node_modules/(?!axios)"
     ],
     "moduleNameMapper": {
-      "../../frontend/src/Pages/UnauthorizedPage": "<rootDir>/frontend/src/Pages/UnauthorizedPage"
+      "^\\.\\.\\/\\.\\.\\/frontend\\/src\\/Pages\\/UnauthorizedPage$": "<rootDir>/frontend/src/Pages/UnauthorizedPage"
     }
   },
   "eslintConfig": {
