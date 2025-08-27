@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Unauthorized from './frontend/src/Pages/UnauthroizedPage.tsx';
+import Unauthorized from 'src/Pages/UnauthroizedPage.tsx';
 
 // Step 3: Mock the useNavigate hook
 const mockedUsedNavigate = jest.fn();
