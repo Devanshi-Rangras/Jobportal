@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "npx react-app-rewired test --watchAll=false --coverage --rootDir ./",
+    "test": "node_modules/.bin/react-app-rewired test --watchAll=false --coverage --rootDir ./",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
