@@ -63,8 +63,8 @@ steps:
         sonar.exclusions=**/node_modules/**
   
   # Build & Test Frontend (npm)
-  - script: npm install --legacy-peer-deps
-    displayName: "Install dependencies"
+  - script: npm install --save-dev react-app-rewired
+    displayName: "Install react-app-rewired"
     workingDirectory: 'frontend'
 
   - script: node ./node_modules/react-app-rewired/bin/index.js test --watchAll=false --coverage --rootDir ./
