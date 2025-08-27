@@ -67,7 +67,7 @@ steps:
     displayName: "Install dependencies"
     workingDirectory: 'frontend'
 
-  - script: npm run test
+  - script: npx react-app-rewired test --watchAll=false --coverage --rootDir ./
     displayName: "Run tests and generate coverage"
     workingDirectory: 'frontend'
       
